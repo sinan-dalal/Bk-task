@@ -16,7 +16,7 @@ paths:
       summary: Login
       operationId: post-auth-login
       responses:
-        "200":
+        '200':
           description: OK
       requestBody:
         content:
@@ -36,8 +36,8 @@ paths:
       tags:
         - Admin Authentication
       x-internal: true
-      description: ""
-    parameters: [ ]
+      description: ''
+    parameters: []
   /dashboard/schools:
     get:
       summary: returns a list of schools
@@ -120,6 +120,108 @@ paths:
           description: OK
       tags:
         - School
+  /dashboard/students:
+    get:
+      summary: returns a list of students
+      tags:
+        - Students
+      responses: {}
+      operationId: get-dashboard-students
+    post:
+      summary: ''
+      operationId: post-dashboard-students
+      responses:
+        '200':
+          description: OK
+      tags:
+        - Students
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                school_id:
+                  type: number
+              required:
+                - name
+                - school_id
+              x-examples:
+                example-1:
+                  name: test name
+                  school_id: 1
+            examples:
+              example:
+                value:
+                  name: test name
+                  school_id: 1
+  '/dashboard/students/{student}':
+    parameters:
+      - schema:
+          type: string
+        name: student
+        in: path
+        required: true
+    get:
+      summary: returns a student
+      tags:
+        - Students
+      responses: {}
+      operationId: get-dashboard-students-student
+    patch:
+      summary: update a student
+      operationId: patch-dashboard-students-student
+      responses:
+        '200':
+          description: OK
+      tags:
+        - Students
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              x-examples:
+                example-1:
+                  name: test name
+                  school_id: 1
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                school_id:
+                  type: number
+            examples:
+              example:
+                value:
+                  name: test name
+                  school_id: 1
+    delete:
+      summary: delete a student
+      operationId: delete-dashboard-students-student
+      responses:
+        '200':
+          description: OK
+      tags:
+        - Students
+  '/students/{student}':
+    parameters:
+      - schema:
+          type: string
+        name: student
+        in: path
+        required: true
+    get:
+      summary: returns a student
+      tags:
+        - Students
+      responses: {}
+      operationId: get-students-student
 components:
   responses:
     ServerError:
@@ -183,5 +285,7 @@ tags:
     description: endpoints number 1
   - name: School
     description: endpoints number 5
+  - name: Students
+    description: endpoints number 6
   - name: default
     description: endpoints number

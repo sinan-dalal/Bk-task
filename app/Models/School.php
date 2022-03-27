@@ -13,6 +13,19 @@ class School extends Model
 
     protected $fillable = ['name'];
 
+    public static function boot ()
+    {
+        parent::boot();
+
+        self::deleting(function (School $school) {
+
+            foreach ($school->students as $student)
+            {
+                $student->delete();
+            }
+        });
+    }
+
     public function students(): HasMany
     {
         return $this->hasMany(Student::class);

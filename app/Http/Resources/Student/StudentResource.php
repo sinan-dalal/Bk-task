@@ -12,6 +12,7 @@ class StudentResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'order'=>$this->order,
             'school' => new SchoolResource($this->whenLoaded('school')),
             "created_at" => $this->created_at ? $this->created_at->format('Y-m-d H:i:s') : null,
         ];
