@@ -11,6 +11,33 @@ paths:
     bearerAuth:
       type: http
       scheme: bearer
+  /dashboard/login:
+    post:
+      summary: Login
+      operationId: post-auth-login
+      responses:
+        "200":
+          description: OK
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                email:
+                  example: admin@admin.com
+                password:
+                  example: password
+            examples:
+              example:
+                value:
+                  email: user email
+                  password: password
+      tags:
+        - Admin Authentication
+      x-internal: true
+      description: ""
+    parameters: [ ]
   /dashboard/schools:
     get:
       summary: returns a list of schools
@@ -152,6 +179,8 @@ components:
 security:
   - bearerAuth: []
 tags:
+  - name: Admin Authentication
+    description: endpoints number 1
   - name: School
     description: endpoints number 5
   - name: default

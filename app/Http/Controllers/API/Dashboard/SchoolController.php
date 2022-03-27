@@ -1,16 +1,22 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API\Dashboard;
 
 use App\Models\School;
 use Illuminate\Http\JsonResponse;
-use App\Http\Requests\StoreSchoolRequest;
-use App\Http\Requests\UpdateSchoolRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\School\StoreSchoolRequest;
+use App\Http\Requests\School\UpdateSchoolRequest;
 use App\Http\Resources\School\SchoolResource;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class SchoolController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth:admins']);
+    }
+
     public function index(): AnonymousResourceCollection
     {
         $schools = School::all();

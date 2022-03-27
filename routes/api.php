@@ -2,7 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SchoolController;
+use App\Http\Controllers\API\User\StudentController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +20,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('dashboard/schools', SchoolController::class);
+/*=================================
+=           students              =
+=================================*/
+
+Route::get('/students/{student}', [StudentController::class,'show']);
+
+/*=====  End of students   ======*/
+

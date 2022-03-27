@@ -1,13 +1,21 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Dashboard;
 
 use App\Models\School;
+use Tests\Feature\BaseTestCase;
 
 class SchoolTest extends BaseTestCase
 {
     protected string $endpoint   = '/api/dashboard/schools';
     protected string $table_name = 'schools';
+
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $this->loginAsAdmin();
+    }
 
     public function testCreateSchool(): void
     {
@@ -59,7 +67,7 @@ class SchoolTest extends BaseTestCase
     {
         $school_count = School::count();
 
-        $school = School::factory()->count(1)->create()->first();
+        $school = School::factory()->create()->first();
 
         $this->json('DELETE', "$this->endpoint/$school->id")
             ->assertStatus(204);
