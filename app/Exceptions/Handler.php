@@ -5,7 +5,7 @@ namespace App\Exceptions;
 use Illuminate\Support\Str;
 use Psr\Log\LoggerInterface;
 use Illuminate\Http\Response;
-use Essa\APIToolKit\Api\ApiResponse;
+use App\Traits\ApiResponse;
 use Illuminate\Database\QueryException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Validation\ValidationException;
