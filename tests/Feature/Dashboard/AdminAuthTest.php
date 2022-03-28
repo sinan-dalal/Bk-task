@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Dashboard;
 
+use App\Models\User;
 use App\Models\Admin;
 use Tests\Feature\BaseTestCase;
 
@@ -11,7 +12,7 @@ class AdminAuthTest extends BaseTestCase
 
     public function testSuperAdminLogin()
     {
-        $admin = Admin::factory()->create();
+        $admin = User::factory()->create();
 
         $payload = [
             'email' => $admin->email,

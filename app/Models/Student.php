@@ -22,7 +22,7 @@ class Student extends Model
         parent::boot();
 
         static::creating(function ($student) {
-            $lastOrder = School:: findOrFail($student ['school_id'])->students->count();
+            $lastOrder = School::findOrFail($student['school_id'])->students->count();
             $student['order'] = ++$lastOrder;
 
             return $student;

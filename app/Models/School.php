@@ -9,18 +9,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class School extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = ['name'];
 
-    public static function boot ()
+    public static function boot()
     {
         parent::boot();
 
         self::deleting(function (School $school) {
 
-            foreach ($school->students as $student)
-            {
+            foreach ($school->students as $student) {
                 $student->delete();
             }
         });

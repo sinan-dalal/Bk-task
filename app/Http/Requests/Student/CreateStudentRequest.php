@@ -24,8 +24,8 @@ class CreateStudentRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>['required','string'],
-            'school_id'=>['required','integer']
+            'name' => ['required', 'string'],
+            'school_id' => ['required', 'integer', 'exists:schools,id']
         ];
     }
 }

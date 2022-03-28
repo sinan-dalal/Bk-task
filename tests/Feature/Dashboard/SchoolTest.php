@@ -19,25 +19,22 @@ class SchoolTest extends BaseTestCase
 
     public function testCreateSchool(): void
     {
-        $payload = School::factory()->make()->toArray();
-
+        $payload = School::factory()->make(['name' => 'test name'])->toArray();
 
         $this->json('POST', $this->endpoint, $payload)
             ->assertStatus(201)
             ->assertSee($payload['name']);
 
-        $this->assertDatabaseHas($this->table_name, ['id' => 1]);
+        $this->assertDatabaseHas($this->table_name, ['name' => 'test name']);
     }
 
     public function testListAllSchools()
     {
-        $school_count = School::count();
-
-        School::factory()->count(5)->create();
+        $schools = School::factory()->count(5)->create();
 
         $this->json('GET', $this->endpoint)
-            ->assertJsonCount($school_count + 5, 'data')
-            ->assertSee(School::find(rand(1, 5))->name)
+            ->assertJsonCount(5, 'data')
+            ->assertSee($schools[2]['name'])
             ->assertStatus(200);
     }
 

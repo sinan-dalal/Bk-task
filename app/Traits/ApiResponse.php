@@ -19,8 +19,8 @@ trait ApiResponse
      */
     private function APIError(
         int $code,
-        $title = 'Oops . Something went wrong , try again or contact the support',
-        $details = null
+            $title = 'Oops . Something went wrong , try again or contact the support',
+            $details = null
     ): JsonResponse
     {
         return response()->json(

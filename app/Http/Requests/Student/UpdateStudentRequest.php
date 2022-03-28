@@ -25,7 +25,7 @@ class UpdateStudentRequest extends FormRequest
     {
         return [
             'name' => ['sometimes', 'string'],
-            'school_id' => ['sometimes', 'integer']
+            'school_id' => ['sometimes', 'integer', 'exists:schools,id']
         ];
     }
 }

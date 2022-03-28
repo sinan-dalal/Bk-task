@@ -2,16 +2,12 @@
 
 namespace Tests\Feature\Dashboard;
 
-use App\Models\User;
 use App\Models\School;
 use App\Models\Student;
 use Tests\Feature\BaseTestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class StudentTest extends BaseTestCase
 {
-    use  RefreshDatabase;
-
     protected $endpoint   = 'api/dashboard/students';
     protected $table_name = 'students';
 
@@ -26,13 +22,13 @@ class StudentTest extends BaseTestCase
 
         School::factory(5)->create();
 
-        $payload = Student::factory()->make([])->toArray();
+        $payload = Student::factory()->make(['name' => 'test name'])->toArray();
 
         $this->json('POST', $this->endpoint, $payload)
             ->assertStatus(201)
             ->assertSee($payload['name']);
 
-        $this->assertDatabaseHas($this->table_name, ['id' => 1]);
+        $this->assertDatabaseHas($this->table_name, ['name' => 'test name']);
     }
 
     public function testViewAllStudentsSuccessfully(): void
@@ -43,8 +39,7 @@ class StudentTest extends BaseTestCase
 
         $this->json('GET', $this->endpoint)
             ->assertStatus(200)
-            ->assertJsonCount(5, 'data')
-            ->assertSee(Student::first(rand(1, 5))->name);
+            ->assertJsonCount(5, 'data');
     }
 
     public function testsCreateStudentValidation(): void
@@ -75,7 +70,9 @@ class StudentTest extends BaseTestCase
 
         $student = Student::factory()->create();
 
-        $payload = Student::factory()->make(['school_id'=>$student->id])->toArray();
+        $school = School::factory()->create();
+
+        $payload = Student::factory()->make(['school_id' => $school->id])->toArray();
 
         $this->json('PUT', $this->endpoint . "/$student->id", $payload)
             ->assertStatus(200)

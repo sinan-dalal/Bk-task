@@ -4,9 +4,7 @@ namespace App\Http\Controllers\API\Dashboard;
 
 use Illuminate\Http\JsonResponse;
 use App\Http\Requests\LoginRequest;
-use App\Http\Resources\Admin\AdminResource;
 use App\Http\Controllers\API\BaseAuthController;
-use Illuminate\Http\Resources\Json\JsonResource;
 
 class AuthController extends BaseAuthController
 {
@@ -21,12 +19,5 @@ class AuthController extends BaseAuthController
         }
 
         return $this->respondWithToken($token);
-    }
-
-    function userTransformer(): JsonResource
-    {
-        $user = auth($this->guard)->user();
-
-        return new AdminResource($user);
     }
 }

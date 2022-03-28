@@ -16,15 +16,11 @@ use App\Http\Controllers\API\User\StudentController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 /*=================================
 =           students              =
 =================================*/
 
-Route::get('/students/{student}', [StudentController::class,'show']);
+Route::get('/students/{student}', [StudentController::class, 'show']);
 
 /*=====  End of students   ======*/
 

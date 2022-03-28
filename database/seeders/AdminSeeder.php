@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use App\Models\Admin;
 use Illuminate\Database\Seeder;
 
@@ -14,9 +15,14 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
-        Admin::factory()->create([
+        User::factory()->create([
             'name' => 'admin',
             'email' => 'admin@admin.com',
+        ]);
+
+        User::factory()->create([
+            'name' => 'admin school',
+            'email' => 'admin@school.com',
         ]);
     }
 }
